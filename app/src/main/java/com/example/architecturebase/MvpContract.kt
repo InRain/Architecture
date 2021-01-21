@@ -5,8 +5,8 @@ import com.example.architecturebase.network.model.Post
 interface MvpContract {
 
     interface IView {
-        fun getPosts(postList: List<Post>)
-        fun showFailDialog(throwable: Throwable)
+        fun showPosts(postList: List<Post>)
+        fun showFailDialog(errorMessage: String)
     }
 
     interface IPresenter {

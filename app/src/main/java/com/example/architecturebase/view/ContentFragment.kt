@@ -36,13 +36,13 @@ class ContentFragment : Fragment(R.layout.content), MvpContract.IView {
         }
     }
 
-    override fun getPosts(postList: List<Post>) {
+    override fun showPosts(postList: List<Post>) {
         mainAdapter.items = postList
         binding.listSRL.isRefreshing = false
     }
 
-    override fun showFailDialog(throwable: Throwable) {
-        Toast.makeText(activity, throwable.message, Toast.LENGTH_SHORT).show()
+    override fun showFailDialog(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
         binding.listSRL.isRefreshing = false
     }
 }

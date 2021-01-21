@@ -1,8 +1,10 @@
 package com.example.architecturebase.repository
 
 import com.example.architecturebase.network.IPostApi
+import com.example.architecturebase.network.model.Post
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -22,8 +24,8 @@ class PostRepository : IPostRepository {
         .client(okHttpClient)
         .build()
 
-    override fun loadData(): IPostApi {
-        return retrofit.create(IPostApi::class.java)
+    override fun loadData(): Call<List<Post>> {
+        return retrofit.create(IPostApi::class.java).getPosts()
     }
 
     companion object {

@@ -10,8 +10,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val mainContentFragment = ContentFragment()
         if (savedInstanceState == null) {
+            val mainContentFragment = ContentFragment()
             supportFragmentManager.beginTransaction().apply {
                 add(R.id.mainFragment, mainContentFragment)
                 commit()

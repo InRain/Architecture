@@ -12,18 +12,20 @@ class PostService : IPostService {
     private val postRepository = PostRepository()
 
     override fun getPosts(
-        functionGetPosts: KFunction1<List<Post>, Unit>,
-        onFailed: (Throwable) -> Unit
+        functionGetPosts: (List<Post>) -> Unit,
+        onFailed: (String) -> Unit
     ) {
-        postRepository.loadData().getPosts().enqueue(object : Callback<List<Post>> {
+        postRepository.loadData().enqueue(object : Callback<List<Post>> {
 
             override fun onFailure(call: Call<List<Post>>, t: Throwable) {
-                onFailed(t)
+                onFailed(t.localizedMessage ?: "Something goes wrong")
             }
 
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
                 if (response.isSuccessful) {
                     response.body()?.let { posts -> functionGetPosts(sortPosts(posts)) }
+                } else {
+                    onFailed("Response failed with code ${response.code()}")
                 }
             }
 

@@ -9,6 +9,6 @@ class Presenter(private val view: MvpContract.IView) : MvpContract.IPresenter {
     private val postService: IPostService = PostService()
 
     override fun loadAllPosts() {
-        postService.getPosts(view::getPosts, view::showFailDialog)
+        postService.getPosts(view::showPosts, view::showFailDialog)
     }
 }
